@@ -44,7 +44,7 @@ public class QueryReason {
         int class2 = head.get(1);
         int property = head.get(2);
         int class3 = head.get(3);
-        if (ThreeKeyMap.checkDuplicate(rs, typeEncode, class1)) return;
+//        if (ThreeKeyMap.checkDuplicate(rs, typeEncode, class1)) return;
         if (!ThreeKeyMap.checkDuplicate(rs, typeEncode, class2)) return;
         if (checkAllValue(rs, property, class3)) {
             DicRdfDataMap.addNewRdfDataBeanParallel(rs, typeEncode, class1);
@@ -55,7 +55,7 @@ public class QueryReason {
         int class1 = head.get(0);
         int property = head.get(2);
         int class3 = head.get(3);
-        if (ThreeKeyMap.checkDuplicate(rs, typeEncode, class1)) return;
+//        if (ThreeKeyMap.checkDuplicate(rs, typeEncode, class1)) return;
         if (checkAllValue(rs, property, class3)) {
             DicRdfDataMap.addNewRdfDataBeanParallel(rs, typeEncode, class1);
         }
@@ -67,11 +67,11 @@ public class QueryReason {
         int class3 = head.get(2);
         List<Integer> rsList = queryRsByRpRo(property, rs);
         for (int rsTmp : rsList) {
-            if (!ThreeKeyMap.checkDuplicate(rsTmp, typeEncode, class1)) {
+//            if (!ThreeKeyMap.checkDuplicate(rsTmp, typeEncode, class1)) {
                 if (checkAllValue(rsTmp, property, class3)) {
                     DicRdfDataMap.addNewRdfDataBeanParallel(rsTmp, typeEncode, class1);
                 }
-            }
+//            }
         }
     }
 

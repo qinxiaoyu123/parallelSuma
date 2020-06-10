@@ -45,7 +45,7 @@ public class ThreeKeyMap {
     }
 
     public static boolean checkDuplicate(int rs, int rp, int ro) {
-        synchronized (IndexThreeKey) {
+//        synchronized (IndexThreeKey) {
             if (IndexThreeKey.containsKey(rp)) {
                 //rp rs ro index
                 Map<Integer, Map<Integer, Integer>> IndexTwoKey = IndexThreeKey.get(rp);
@@ -55,7 +55,7 @@ public class ThreeKeyMap {
                 }
             }
             return false;
-        }
+//        }
     }
 
     public static boolean checkDuplicateBeforeIndex(int index, int rs, int rp, int ro) {
