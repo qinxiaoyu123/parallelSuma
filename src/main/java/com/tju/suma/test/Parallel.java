@@ -22,6 +22,7 @@ public class Parallel {
     static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(n, n,
             60L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
     static public AtomicInteger index;
+
     public static void reason(int step) throws InterruptedException, ExecutionException {
         long startTime = System.currentTimeMillis();
         int loopCount = 1;
@@ -47,15 +48,13 @@ public class Parallel {
 
             List<Future<Boolean>> futures = new ArrayList<>();
             while (currLoopIndex < currLoopLastIndex) {
-                DicRdfDataBean dicRdfDataBean = totalData.get(currLoopIndex);
-                Objects.requireNonNull(dicRdfDataBean,"dicRdfDataBean at parallel is null");
                 int begin = currLoopIndex;
-                int end = currLoopIndex+1000<currLoopLastIndex?currLoopIndex+1000:currLoopLastIndex-1;
+                int end = currLoopIndex + 500 < currLoopLastIndex ? currLoopIndex + 500 : currLoopLastIndex - 1;
                 Future<Boolean> future = threadPool.submit(new MyNewTask(begin, end));
                 futures.add(future);
-                currLoopIndex = end+1;
+                currLoopIndex = end + 1;
             }
-            for(Future<Boolean> future : futures){
+            for (Future<Boolean> future : futures) {
                 future.get();
             }
 

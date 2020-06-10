@@ -31,11 +31,11 @@ public class QueryReason {
         int class3 = head.get(3);
         List<Integer> rsList = queryRsByRpRo(property, rs);
         for (int rsTmp : rsList) {
-            if (!ThreeKeyMap.checkDuplicate(rsTmp, typeEncode, class1)) {
+//            if (!ThreeKeyMap.checkDuplicate(rsTmp, typeEncode, class1)) {
                 if (checkAllValue(rsTmp, property, class3)) {
                     DicRdfDataMap.addNewRdfDataBeanParallel(rsTmp, typeEncode, class1);
                 }
-            }
+//            }
         }
     }
 
