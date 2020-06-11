@@ -11,7 +11,7 @@ public class TwoKeyMap {
     public static final Map<Integer, Map<Integer,Integer>> IopTwoKey = new ConcurrentHashMap<>();
 
     public static int getFirstIndexSpFromMap(int rs, int rp, int index) {
-        synchronized (IspTwoKey){
+//        synchronized (IspTwoKey){
             if (IspTwoKey.containsKey(rs)) {
                 Map<Integer, Integer> IpTwoKey = IspTwoKey.get(rs);
                 if(IpTwoKey.containsKey(rp)){
@@ -29,12 +29,12 @@ public class TwoKeyMap {
                 return -1;
 
             }
-        }
+//        }
     }
 
 
     public static int getFirstIndexOpFromMap(int rp, int ro, int index) {
-        synchronized (IopTwoKey){
+//        synchronized (IopTwoKey){
             if (IopTwoKey.containsKey(ro)) {
                 Map<Integer, Integer> IpTwoKey = IopTwoKey.get(ro);
                 if(IpTwoKey.containsKey(rp)){
@@ -51,12 +51,12 @@ public class TwoKeyMap {
                 }});
                 return -1;
             }
-        }
+//        }
 
     }
 
     public static int getFirstIndexSpFromMap(int rs, int rp) {
-        synchronized (IspTwoKey){
+//        synchronized (IspTwoKey){
             if (IspTwoKey.containsKey(rs)) {
                 Map<Integer, Integer> IpTwoKey = IspTwoKey.get(rs);
                 if (IpTwoKey.containsKey(rp)) {
@@ -64,12 +64,12 @@ public class TwoKeyMap {
                 }
             }
             return -1;
-        }
+//        }
     }
 
 
     public static int getFirstIndexOpFromMap(int rp , int ro)  {
-        synchronized (IopTwoKey){
+//        synchronized (IopTwoKey){
             if (IopTwoKey.containsKey(ro)) {
                 Map<Integer, Integer> IpTwoKey = IopTwoKey.get(ro);
                 if (IpTwoKey.containsKey(rp)) {
@@ -77,13 +77,13 @@ public class TwoKeyMap {
                 }
             }
             return -1;
-        }
+//        }
     }
 
 
     public static List<Integer> findAllTriplesFromRs(int tmp) {
         List<Integer> rpRoTriples = new ArrayList<>();
-        synchronized (IspTwoKey){
+//        synchronized (IspTwoKey){
             if(IspTwoKey.containsKey(tmp)){
                 Map<Integer, Integer> indexBean = IspTwoKey.get(tmp);
                 for (Map.Entry<Integer, Integer> tt : indexBean.entrySet()) {
@@ -101,12 +101,12 @@ public class TwoKeyMap {
                     } while (indexNew != -1);
                 }
             }
-        }
+//        }
         return rpRoTriples;
     }
     public static List<Integer> findAllTriplesFromRo(int tmp) {
         List<Integer> rsRpTriples = new ArrayList<>();
-        synchronized (IopTwoKey){
+//        synchronized (IopTwoKey){
             if(IopTwoKey.containsKey(tmp)){
                 Map<Integer, Integer> indexBean = IopTwoKey.get(tmp);
                 for (Map.Entry<Integer, Integer> tt : indexBean.entrySet()) {
@@ -124,7 +124,7 @@ public class TwoKeyMap {
                     } while (indexNew != -1);
                 }
             }
-        }
+//        }
         return rsRpTriples;
     }
 
@@ -134,7 +134,7 @@ public class TwoKeyMap {
         while(rsRpList.hasNext()){
             int rs = rsRpList.next();
             int rp = rsRpList.next();
-            DicRdfDataMap.addNewRdfDataBeanParallelWithOutSynchronized(rs, rp, minNew);
+            DicRdfDataMap.addNewRdfDataBeanParallel(rs, rp, minNew);
         }
     }
     public static void replaceWithMinIsp(int ii, int minNew) {
@@ -143,7 +143,7 @@ public class TwoKeyMap {
         while(rpRoList.hasNext()){
             int rp = rpRoList.next();
             int ro = rpRoList.next();
-            DicRdfDataMap.addNewRdfDataBeanParallelWithOutSynchronized(minNew, rp, ro);
+            DicRdfDataMap.addNewRdfDataBeanParallel(minNew, rp, ro);
         }
     }
 

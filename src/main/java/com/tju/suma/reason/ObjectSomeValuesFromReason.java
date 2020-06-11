@@ -14,14 +14,11 @@ import static com.tju.suma.reason.DicSerialReason.*;
 
 public class ObjectSomeValuesFromReason {
     //A subclassof R.C
-    public static int objectSomeVaule = 0;
-    public static int objectSomeretun = 0;
 
-    public static void reason(int index, int rs, List<Integer> head) {
+
+    public static void reason(int rs, List<Integer> head) {
         int rp = head.get(0);
         int class2 = head.get(1);
-
-
         int firstTripleIsp = TwoKeyMap.getFirstIndexSpFromMap(rs, rp);
         if (firstTripleIsp != -1) {
             if (class2 == 1) {
@@ -35,26 +32,23 @@ public class ObjectSomeValuesFromReason {
                 indexNew = dicDataBeanIterator.getNsp();
                 int ro = dicDataBeanIterator.getRo();
                 if (ThreeKeyMap.checkDuplicate(ro, typeEncode, class2)) {
-                    objectSomeretun++;
                     return;
                 }
             } while (indexNew != -1);
         }
-
         addSomeValueFrom(rs, rp, class2);
-
-
     }
 
     private static void addSomeValueFrom(int rs, int rp, int class2) {
         int ro = Parallel.anonymous.getAndDecrement();
-        objectSomeVaule++;
+
         addNewRdfDataBeanParallel(rs, rp, ro);
         addNewRdfDataBeanParallel(ro, typeEncode, class2);
     }
 
 
     public static void addNewRdfDataBeanParallel(int rs, int rp, int ro) {
+
         int index = ThreeKeyMap.checkDuplicateIfNotThenAdd(rs, rp, ro);
         //已经存在
         if (index == 0) {

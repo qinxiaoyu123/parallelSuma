@@ -6,7 +6,6 @@ import com.tju.suma.io.DictionaryInput;
 import com.tju.suma.io.DictionaryOutput;
 import com.tju.suma.jenaQuery.RewriteThing;
 import com.tju.suma.reason.DicSerialReason;
-import com.tju.suma.reason.ObjectSomeValuesFromReason;
 import com.tju.suma.reason.SameAsReason;
 import org.apache.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -16,17 +15,21 @@ import java.util.concurrent.ExecutionException;
 
 import static com.tju.suma.jenaQuery.JenaTest.jenaQuerySimple;
 
-public class SUMARunTest {
+public class ParallelJar {
     private static Logger log = Logger.getLogger(SUMARunTest.class);
     public static void main(String[] args) throws Exception {
-        String pathTBox = "data/univ-bench-dl.owl";
-        String pathABox = "data/uobm1.nt";
-        String pathExtendedABox = "data/new_uobm1_test.nt";
-        String pathDataThing = "data/newThing_oubm1_test.nt";
-        boolean isQueryByJena = true;
+        if(args.length<5){
+            System.out.println("Please enter args as follows: pathTBox pathABox pathExtendedABox isQueryByJena queryPath");
+            return;
+        }
+        String pathTBox = args[0];
+        String pathABox = args[1];
+        String pathExtendedABox = args[2];
+        String pathDataThing = "newThing.nt";
+        boolean isQueryByJena = Boolean.parseBoolean(args[3]);
         initIsRoleWriting(true);
-        String queryPath = "data/standard.sparql";
-        String answerPath = "data/result_new_no_rewrite.nt";
+        String queryPath = args[4];
+        String answerPath = "result_new.nt";
 
         int n_step = 7;
 
@@ -69,7 +72,7 @@ public class SUMARunTest {
     }
 
     private static void outPutDictionaryToFile() throws IOException {
-        DictionaryOutput.encodeMap("data/encode.txt");
+        DictionaryOutput.encodeMap("encode.txt");
     }
 
     public static void materialization(int n_step) throws ExecutionException, InterruptedException {
@@ -81,7 +84,7 @@ public class SUMARunTest {
     }
 
     private static void readDictionaryInMemory() throws IOException {
-        DictionaryInput.readDictionary("data/encode.txt");
+        DictionaryInput.readDictionary("encode.txt");
     }
 
     public static void initIsRoleWriting(boolean isRoleWriting) {

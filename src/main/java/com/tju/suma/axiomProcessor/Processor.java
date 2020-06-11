@@ -38,7 +38,7 @@ public class Processor {
     public static final int EquivalentProperty = 2012;
     public static final int OWLDisjointClassesAxiom = 2003;
     public static final int ObjectPropertyAssertion = 2008;
-    public static boolean isRoleWriting = false;
+    public static boolean isRoleWriting = true;
     public static RoleGraph graph = RoleGraph.getRoleGraph();
     public static final Map<Integer,Integer> typeInverse = new ConcurrentHashMap<Integer, Integer>(){{
         put(ObjectPropertyRange,ObjectPropertyDomain);

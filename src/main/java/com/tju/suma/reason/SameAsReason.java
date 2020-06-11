@@ -17,11 +17,11 @@ public class SameAsReason {
     public static Map<Integer, Integer> equiRepresentation = new ConcurrentHashMap<>();
     private static Logger log = Logger.getLogger(SameAsReason.class);
 
-    private static final Object object_loopRsRpFindRo = new Object();
-    private static final Object object_loopRpRoFindRs = new Object();
-    private static final Object object_comEquiPool = new Object();
-    private static final Object object_reFreshEquiRepre = new Object();
-    private static final Object object_getMin = new Object();
+//    private static final Object object_loopRsRpFindRo = new Object();
+//    private static final Object object_loopRpRoFindRs = new Object();
+//    private static final Object object_comEquiPool = new Object();
+//    private static final Object object_reFreshEquiRepre = new Object();
+//    private static final Object object_getMin = new Object();
 
     public static boolean boolSameAs(int rs) {
 //        synchronized (FunctionalObjectPropertyReason.object) {
@@ -167,6 +167,7 @@ public class SameAsReason {
                 tempPool.add(rs);
                 equiPoolIndex.put(rs, rsTmpEquiv);
             }
+
             reFreshEquiRepre(rs);
 //        }
 

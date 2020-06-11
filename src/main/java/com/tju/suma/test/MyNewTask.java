@@ -48,14 +48,13 @@ public class MyNewTask implements Callable<Boolean> {
 
            DicSerialReason.convertDataToRuleKey(ruleKey, Rp, Ro);
 //           log.info(Dictionary.getDecode()[Rs]+" "+Dictionary.getDecode()[Rp]+" "+Dictionary.getDecode()[Ro]);
-           int finalI = i;
            ruleKey.forEach(str -> {
                if (dicRuleMap.containsKey(str)) {
                    List<DicOwlBean> OwlRule = dicRuleMap.get(str);
                    for (DicOwlBean typeHead : OwlRule) {
                        int type = typeHead.getType();
                        List<Integer> head = typeHead.getRuleHead();
-                       simpleSwitchReasonType(finalI, Rs, Rp, Ro, type, head);
+                       simpleSwitchReasonType(Rs, Rp, Ro, type, head);
                    }
                }
            });
@@ -64,7 +63,7 @@ public class MyNewTask implements Callable<Boolean> {
         return true;
     }
 
-    public static void simpleSwitchReasonType(int index, int rs, int rp, int ro, int type, List<Integer> head) {
+    public static void simpleSwitchReasonType(int rs, int rp, int ro, int type, List<Integer> head) {
         switch (type) {
             case 2013://SubObjectPropertyOf 2013
                 SubPropertyReason.reason(rs, head, ro);
@@ -77,7 +76,7 @@ public class MyNewTask implements Callable<Boolean> {
                 BasicReason.reason(ro, head);
                 break;
             case 3005:
-                ObjectSomeValuesFromReason.reason(index, rs, head);
+                ObjectSomeValuesFromReason.reason(rs, head);
                 break;
             case 0:
                 QueryReason.equivalentClass2Reason(rs, head);

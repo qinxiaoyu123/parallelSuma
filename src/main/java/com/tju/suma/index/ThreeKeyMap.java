@@ -59,7 +59,7 @@ public class ThreeKeyMap {
     }
 
     public static boolean checkDuplicateBeforeIndex(int index, int rs, int rp, int ro) {
-        synchronized (IndexThreeKey) {
+//        synchronized (IndexThreeKey) {
             if (IndexThreeKey.containsKey(rp)) {
                 //rp rs ro index
                 Map<Integer, Map<Integer, Integer>> IndexTwoKey = IndexThreeKey.get(rp);
@@ -72,14 +72,14 @@ public class ThreeKeyMap {
                 }
             }
             return false;
-        }
+//        }
     }
 
     //return 0 表示已经存在不添加，return 非0表示不存在，并且已经更新到索引中了
     //这个函数目的是将判断和添加锁在一起
     public static int checkDuplicateIfNotThenAdd(int rs, int rp, int ro) {
         int indexTmp = 0;
-        synchronized (IndexThreeKey) {
+//        synchronized (IndexThreeKey) {
             if (IndexThreeKey.containsKey(rp)) {
                 //rp rs ro index
                 Map<Integer, Map<Integer, Integer>> IndexTwoKey = IndexThreeKey.get(rp);
@@ -115,6 +115,6 @@ public class ThreeKeyMap {
                 return indexTmp;
             }
         }
-    }
+//    }
 
 }
