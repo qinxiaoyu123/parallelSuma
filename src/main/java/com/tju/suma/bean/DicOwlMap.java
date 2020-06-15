@@ -1,7 +1,6 @@
 package com.tju.suma.bean;
 
 import com.tju.suma.axiomProcessor.Processor;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,23 @@ public class DicOwlMap {
     public static final Map<Integer, List<DicOwlBean>> EquiDicRuleMap = new ConcurrentHashMap<>();
 
     public static Map<String, List<DicOwlBean>> getRuleMap(){ return DicRuleMap; }
-    
+
+    static class Pair{
+        int key;
+        int val;
+        Pair(int key, int val){
+            this.key = key;
+            this.val = val;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public int getValue() {
+            return val;
+        }
+    }
     public static void addDicOwlMap(int type, int class1, int class2) {
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(type);
@@ -57,7 +72,7 @@ public class DicOwlMap {
     }
 
     public static void addDicOwlPropertyRangeMap(int type, int pro, int ran) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, pro);
+        Pair pair = rewriteProperty(type, pro);
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(ran);
@@ -83,7 +98,7 @@ public class DicOwlMap {
     }
 
     public static void addDicOwlPropertyDomainMap(int type, int pro, int dom) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, pro);
+        Pair pair = rewriteProperty(type, pro);
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(dom);
@@ -93,7 +108,7 @@ public class DicOwlMap {
 
     public static void addDicOwlObjectSomeValuesMap(int type, int class1, int propertyInt, int fillterInt) {
         DicOwlBean dicOwlBean = new DicOwlBean();
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey(),fillterInt);
         String key = "*0" + class1;
@@ -101,7 +116,7 @@ public class DicOwlMap {
     }
     public static void addDicOwlObjectHasValueMap(int type, int class1, int propertyInt, int fillterInt) {
         DicOwlBean dicOwlBean = new DicOwlBean();
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey(),fillterInt);
         String key = "*0" + class1;
@@ -109,13 +124,13 @@ public class DicOwlMap {
     }
     public static void addEquiDicSomeValuesMap(int class1, int type, int propertyInt, int class2Int) {
         DicOwlBean dicOwlBean = new DicOwlBean();
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey(),class2Int);
         EquiDicRuleMap.get(class1).add(dicOwlBean);
     }
-    private static Pair<Integer, Integer> rewriteProperty(int type, int propertyInt) {
-        if(!Processor.isRoleWriting) return new Pair<>(propertyInt, type);
+    private static Pair rewriteProperty(int type, int propertyInt) {
+        if(!Processor.isRoleWriting) return new Pair(propertyInt, type);
         if(EquivalentPropertyMap.EquivalentPropertyMap.containsKey(propertyInt)){
             propertyInt = EquivalentPropertyMap.EquivalentPropertyMap.get(propertyInt);
         }
@@ -123,7 +138,7 @@ public class DicOwlMap {
             propertyInt = InversePropertyMap.InverseMap.get(propertyInt);
             type = Processor.typeInverse.get(type);
         }
-        return new Pair<>(propertyInt, type);
+        return new Pair(propertyInt, type);
     }
 
     public static void addDicOwlSubCLassMap(int type, int sub, int sup) {
@@ -149,7 +164,7 @@ public class DicOwlMap {
     }
 
     public static void addDicOwlSymmetricPropertyMap(int type, int pro) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, pro);
+        Pair pair = rewriteProperty(type, pro);
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey());
@@ -158,7 +173,7 @@ public class DicOwlMap {
     }
 
     public static void addDicOwlTransitivePropertyMap(int type, int pro) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, pro);
+        Pair pair = rewriteProperty(type, pro);
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey());
@@ -167,7 +182,7 @@ public class DicOwlMap {
     }
 
     public static void addDicOwlInverseFunctionalMap(int type, int pro) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, pro);
+        Pair pair = rewriteProperty(type, pro);
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey());
@@ -176,7 +191,7 @@ public class DicOwlMap {
     }
 
     public static void addDicOwlFunctionalPropertyMap(int type, int pro) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, pro);
+        Pair pair = rewriteProperty(type, pro);
         DicOwlBean dicOwlBean = new DicOwlBean();
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey());
@@ -186,7 +201,7 @@ public class DicOwlMap {
 
     public static void addDicOwlObjectAllValuesMap(int type, int class1, int propertyInt, int classAllValues) {
         DicOwlBean dicOwlBean = new DicOwlBean();
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         dicOwlBean.setType(pair.getValue());
         dicOwlBean.setRuleHead(pair.getKey(),classAllValues);
         String key = "*0" + class1;
@@ -194,7 +209,7 @@ public class DicOwlMap {
     }
 
     public static void addEquiDicAllValueMap(int class1, int type, int propertyInt, int classAllValues) {
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         DicOwlBean bean = new DicOwlBean();
         bean.setType(pair.getValue());
         bean.setRuleHead(pair.getKey(), classAllValues);
@@ -203,7 +218,7 @@ public class DicOwlMap {
 
     public static void addDicOwlMinCardinalityMap(int type, int class1, int cardinality, int propertyInt, int class2Int) {
         DicOwlBean dicOwlBean = new DicOwlBean();
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         dicOwlBean.setType(pair.getValue());//class2
         dicOwlBean.setRuleHead(cardinality,pair.getKey(),class2Int);
         String key = "*0" + class1;
@@ -212,7 +227,7 @@ public class DicOwlMap {
 
     public static void addEquiMinCardinalityMap(int class1, int type, int cardinality, int propertyInt, int class2Int) {
         DicOwlBean bean = new DicOwlBean();
-        Pair<Integer, Integer> pair = rewriteProperty(type, propertyInt);
+        Pair pair = rewriteProperty(type, propertyInt);
         bean.setType(pair.getValue());
         bean.setRuleHead(cardinality, pair.getKey(), class2Int);
         DicOwlMap.EquiDicRuleMap.get(class1).add(bean);

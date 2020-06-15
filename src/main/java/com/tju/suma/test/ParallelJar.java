@@ -18,17 +18,19 @@ import static com.tju.suma.jenaQuery.JenaTest.jenaQuerySimple;
 public class ParallelJar {
     private static Logger log = Logger.getLogger(SUMARunTest.class);
     public static void main(String[] args) throws Exception {
-        if(args.length<5){
-            System.out.println("Please enter args as follows: pathTBox pathABox pathExtendedABox isQueryByJena queryPath");
+        if(args.length<6){
+            System.out.println("Please enter args as follows: pathTBox pathABox pathExtendedABox eachThreadDataSize threadSize isQueryByJena queryPath");
             return;
         }
         String pathTBox = args[0];
         String pathABox = args[1];
         String pathExtendedABox = args[2];
+        int eachThreadDataSize = Integer.parseInt(args[3]);
+        int threadSize = Integer.parseInt(args[4]);
         String pathDataThing = "newThing.nt";
-        boolean isQueryByJena = Boolean.parseBoolean(args[3]);
+        boolean isQueryByJena = Boolean.parseBoolean(args[5]);
         initIsRoleWriting(true);
-        String queryPath = args[4];
+        String queryPath = args[6];
         String answerPath = "result_new.nt";
 
         int n_step = 7;
@@ -40,7 +42,7 @@ public class ParallelJar {
 
         outPutDictionaryToFile();
 
-        materialization(n_step);
+        materialization(n_step, eachThreadDataSize, threadSize);
         readDictionaryInMemory();
 
 
@@ -75,9 +77,9 @@ public class ParallelJar {
         DictionaryOutput.encodeMap("encode.txt");
     }
 
-    public static void materialization(int n_step) throws ExecutionException, InterruptedException {
+    public static void materialization(int n_step, int eachThreadDataSize, int threadSize) throws ExecutionException, InterruptedException {
         long startTime3 = System.currentTimeMillis();
-        Parallel.reason(n_step);
+        Parallel.reason(n_step, eachThreadDataSize, threadSize);
         long startTime4 = System.currentTimeMillis();
         log.info("reason time: " + (startTime4 - startTime3) + " ms");
         SameAsReason.addEquivIndividual();

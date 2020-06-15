@@ -5,6 +5,7 @@ import com.tju.suma.bean.DicOwlMap;
 import com.tju.suma.bean.DicRdfDataBean;
 import com.tju.suma.bean.DicRdfDataMap;
 import com.tju.suma.dictionary.Dictionary;
+import com.tju.suma.index.ThreeKeyMap;
 import com.tju.suma.reason.*;
 import org.apache.log4j.Logger;
 
@@ -64,6 +65,7 @@ public class MyNewTask implements Callable<Boolean> {
     }
 
     public static void simpleSwitchReasonType(int rs, int rp, int ro, int type, List<Integer> head) {
+//        System.out.println(Thread.currentThread().getName());
         switch (type) {
             case 2013://SubObjectPropertyOf 2013
                 SubPropertyReason.reason(rs, head, ro);

@@ -20,14 +20,18 @@ public class Parallel {
     private static Logger log = Logger.getLogger(Parallel.class);
     static int n = Runtime.getRuntime().availableProcessors();
     static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(n, n,
-            60L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+            60L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());;
     static public AtomicInteger index;
 
-    public static void reason(int step) throws InterruptedException, ExecutionException {
+    public static void reason(int step, int eachThreadDataSize, int threadSize) throws InterruptedException, ExecutionException {
         long startTime = System.currentTimeMillis();
         int loopCount = 1;
         int currLoopIndex = 0;
         int currLoopLastIndex = 0;
+        System.out.println("ThreadSize: "+n);
+        if (threadSize != -1) {
+            n = threadSize;
+        }
         //遍历数据
         Map<Integer, DicRdfDataBean> totalData = DicRdfDataMap.getDicDataMap();
         //存放每次新生成的数据,每次循环结束把新数据copy到iteratorMap进行第二轮迭代
@@ -35,7 +39,7 @@ public class Parallel {
 //        //迭代数据，第二轮以后迭代 iteratorMap，每次结束把数据copy到totalData进行存储
 //        Map<Integer, DicRdfDataBean> iteratorMap = DicRdfDataMap.getDicIteratorMap();
         //规则
-        Map<String, List<DicOwlBean>> totalRule = DicOwlMap.getRuleMap();
+//        Map<String, List<DicOwlBean>> totalRule = DicOwlMap.getRuleMap();
         //索引
         index = new AtomicInteger(totalData.size());
         log.info("----------------------Start Materialization--------------------------");
@@ -49,7 +53,7 @@ public class Parallel {
             List<Future<Boolean>> futures = new ArrayList<>();
             while (currLoopIndex < currLoopLastIndex) {
                 int begin = currLoopIndex;
-                int end = currLoopIndex + 500 < currLoopLastIndex ? currLoopIndex + 500 : currLoopLastIndex - 1;
+                int end = currLoopIndex + eachThreadDataSize < currLoopLastIndex ? currLoopIndex + eachThreadDataSize : currLoopLastIndex - 1;
                 Future<Boolean> future = threadPool.submit(new MyNewTask(begin, end));
                 futures.add(future);
                 currLoopIndex = end + 1;

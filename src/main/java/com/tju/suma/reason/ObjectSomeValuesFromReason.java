@@ -64,7 +64,6 @@ public class ObjectSomeValuesFromReason {
         dicDataBean.setNsp(nsp, index);
         int nop = TwoKeyMap.getFirstIndexOpFromMap(rp, ro, index);
         dicDataBean.setNop(nop, index);
-        dicDataBean.setNp(-1);
         DicRdfDataMap.getDicDataMap().put(index, dicDataBean);
 
 

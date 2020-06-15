@@ -22,6 +22,8 @@ public class SUMARunTest {
         String pathTBox = "data/univ-bench-dl.owl";
         String pathABox = "data/uobm1.nt";
         String pathExtendedABox = "data/new_uobm1_test.nt";
+        int eachThreadDataSize = 1000;
+        int threadSize = -1;
         String pathDataThing = "data/newThing_oubm1_test.nt";
         boolean isQueryByJena = true;
         initIsRoleWriting(true);
@@ -37,7 +39,7 @@ public class SUMARunTest {
 
         outPutDictionaryToFile();
 
-        materialization(n_step);
+        materialization(n_step, eachThreadDataSize, threadSize);
         readDictionaryInMemory();
 
 
@@ -72,9 +74,9 @@ public class SUMARunTest {
         DictionaryOutput.encodeMap("data/encode.txt");
     }
 
-    public static void materialization(int n_step) throws ExecutionException, InterruptedException {
+    public static void materialization(int n_step, int eachThreadDataSize, int threadSize) throws ExecutionException, InterruptedException {
         long startTime3 = System.currentTimeMillis();
-        Parallel.reason(n_step);
+        Parallel.reason(n_step, eachThreadDataSize, threadSize);
         long startTime4 = System.currentTimeMillis();
         log.info("reason time: " + (startTime4 - startTime3) + " ms");
         SameAsReason.addEquivIndividual();

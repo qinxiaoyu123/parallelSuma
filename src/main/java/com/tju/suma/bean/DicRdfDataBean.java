@@ -9,7 +9,6 @@ public class DicRdfDataBean {
     private int Rp;
     private int Ro;
     private int Nsp;
-    private int Np;
     private int Nop;
 
     public int getRs() {
@@ -69,8 +68,9 @@ public class DicRdfDataBean {
         }
     }
 
-    public void setNp(int np) {
-        Np = np;
+    public DicRdfDataBean() {
+        Nsp = -1;
+        Nop = -1;
     }
 
     public int getNop() {
@@ -88,7 +88,6 @@ public class DicRdfDataBean {
                 ", Rp='" + Rp + '\'' +
                 ", Ro='" + Ro + '\'' +
                 ", Nsp=" + Nsp +
-                ", Np=" + Np +
                 ", Npo=" + Nop +
                 '}';
     }

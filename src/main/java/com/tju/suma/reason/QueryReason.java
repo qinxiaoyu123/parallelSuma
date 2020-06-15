@@ -32,9 +32,9 @@ public class QueryReason {
         List<Integer> rsList = queryRsByRpRo(property, rs);
         for (int rsTmp : rsList) {
 //            if (!ThreeKeyMap.checkDuplicate(rsTmp, typeEncode, class1)) {
-                if (checkAllValue(rsTmp, property, class3)) {
-                    DicRdfDataMap.addNewRdfDataBeanParallel(rsTmp, typeEncode, class1);
-                }
+            if (checkAllValue(rsTmp, property, class3)) {
+                DicRdfDataMap.addNewRdfDataBeanParallel(rsTmp, typeEncode, class1);
+            }
 //            }
         }
     }
@@ -68,9 +68,9 @@ public class QueryReason {
         List<Integer> rsList = queryRsByRpRo(property, rs);
         for (int rsTmp : rsList) {
 //            if (!ThreeKeyMap.checkDuplicate(rsTmp, typeEncode, class1)) {
-                if (checkAllValue(rsTmp, property, class3)) {
-                    DicRdfDataMap.addNewRdfDataBeanParallel(rsTmp, typeEncode, class1);
-                }
+            if (checkAllValue(rsTmp, property, class3)) {
+                DicRdfDataMap.addNewRdfDataBeanParallel(rsTmp, typeEncode, class1);
+            }
 //            }
         }
     }
